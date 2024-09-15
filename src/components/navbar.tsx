@@ -7,9 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 export function Navbar() {
+  return (
+    <Suspense fallback={<NavbarFallback />}>
+      <NavbarContent />
+    </Suspense>
+  );
+}
+
+function NavbarContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -58,6 +66,23 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             <ThemeToggle />
           </div>
+        </div>
+      </nav>
+      <div className="h-20" />
+    </>
+  );
+}
+
+function NavbarFallback() {
+  return (
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b bg-blue-100/30 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/75">
+        <div className="container mx-auto flex h-20 items-center justify-between px-4">
+          <div className="flex items-center gap-4">
+            <div className="h-10 w-[150px] bg-gray-200 dark:bg-gray-700" />
+            <div className="h-10 w-[300px] bg-gray-200 dark:bg-gray-700" />
+          </div>
+          <div className="h-10 w-10 bg-gray-200 dark:bg-gray-700" />
         </div>
       </nav>
       <div className="h-20" />

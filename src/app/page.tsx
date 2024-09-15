@@ -8,7 +8,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -127,7 +127,7 @@ const columns: ColumnDef<FormattedResult>[] = [
   },
 ];
 
-export default function TrademarkTable() {
+function TrademarkTableContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
   const [results, setResults] = useState<FormattedResult[]>([]);
@@ -375,5 +375,13 @@ export default function TrademarkTable() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function TrademarkTable() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TrademarkTableContent />
+    </Suspense>
   );
 }
