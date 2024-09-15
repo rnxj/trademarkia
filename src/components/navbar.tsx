@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
@@ -63,9 +62,9 @@ function NavbarContent() {
               </Button>
             </form>
           </div>
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <ThemeToggle />
-          </div>
+          </div> */}
         </div>
       </nav>
       <div className="h-20" />
